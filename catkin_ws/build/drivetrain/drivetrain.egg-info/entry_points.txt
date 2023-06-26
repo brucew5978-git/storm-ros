@@ -1,0 +1,3 @@
+[console_scripts]
+drivetrain = drivetrain.drivetrain:main
+

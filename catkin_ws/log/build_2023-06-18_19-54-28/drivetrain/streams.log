@@ -1,0 +1,21 @@
+[2.579s] Invoking command in '/home/odroid/code/catkin_ws/src/drivetrain': PYTHONPATH=/home/odroid/code/catkin_ws/build/drivetrain/prefix_override:/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/drivetrain build --build-base /home/odroid/code/catkin_ws/build/drivetrain/build install --record /home/odroid/code/catkin_ws/build/drivetrain/install.log --single-version-externally-managed
+[3.218s] running egg_info
+[3.220s] writing ../../build/drivetrain/drivetrain.egg-info/PKG-INFO
+[3.221s] writing dependency_links to ../../build/drivetrain/drivetrain.egg-info/dependency_links.txt
+[3.221s] writing entry points to ../../build/drivetrain/drivetrain.egg-info/entry_points.txt
+[3.221s] writing requirements to ../../build/drivetrain/drivetrain.egg-info/requires.txt
+[3.222s] writing top-level names to ../../build/drivetrain/drivetrain.egg-info/top_level.txt
+[3.227s] reading manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'
+[3.230s] writing manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'
+[3.230s] running build
+[3.231s] running build_py
+[3.231s] running install
+[3.232s] running install_lib
+[3.235s] running install_data
+[3.237s] running install_egg_info
+[3.241s] removing '/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info' (and everything under it)
+[3.242s] Copying ../../build/drivetrain/drivetrain.egg-info to /home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info
+[3.244s] running install_scripts
+[3.301s] Installing drivetrain script to /home/odroid/code/catkin_ws/install/drivetrain/lib/drivetrain
+[3.303s] writing list of installed files to '/home/odroid/code/catkin_ws/build/drivetrain/install.log'
+[3.437s] Invoked command in '/home/odroid/code/catkin_ws/src/drivetrain' returned '0': PYTHONPATH=/home/odroid/code/catkin_ws/build/drivetrain/prefix_override:/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/drivetrain build --build-base /home/odroid/code/catkin_ws/build/drivetrain/build install --record /home/odroid/code/catkin_ws/build/drivetrain/install.log --single-version-externally-managed

@@ -1,0 +1,146 @@
+[0.000000] (-) TimerEvent: {}
+[0.000826] (drivetrain) JobQueued: {'identifier': 'drivetrain', 'dependencies': OrderedDict()}
+[0.001631] (drivetrain) JobStarted: {'identifier': 'drivetrain'}
+[0.099130] (-) TimerEvent: {}
+[0.199708] (-) TimerEvent: {}
+[0.300237] (-) TimerEvent: {}
+[0.400756] (-) TimerEvent: {}
+[0.501890] (-) TimerEvent: {}
+[0.603170] (-) TimerEvent: {}
+[0.707211] (-) TimerEvent: {}
+[0.807975] (-) TimerEvent: {}
+[0.910152] (-) TimerEvent: {}
+[1.012306] (-) TimerEvent: {}
+[1.114457] (-) TimerEvent: {}
+[1.216580] (-) TimerEvent: {}
+[1.318707] (-) TimerEvent: {}
+[1.420853] (-) TimerEvent: {}
+[1.522963] (-) TimerEvent: {}
+[1.625176] (-) TimerEvent: {}
+[1.727288] (-) TimerEvent: {}
+[1.828007] (-) TimerEvent: {}
+[1.928959] (-) TimerEvent: {}
+[2.029885] (-) TimerEvent: {}
+[2.130807] (-) TimerEvent: {}
+[2.231793] (-) TimerEvent: {}
+[2.332747] (-) TimerEvent: {}
+[2.434884] (-) TimerEvent: {}
+[2.535854] (-) TimerEvent: {}
+[2.636770] (-) TimerEvent: {}
+[2.737691] (-) TimerEvent: {}
+[2.842359] (-) TimerEvent: {}
+[2.943301] (-) TimerEvent: {}
+[3.044181] (-) TimerEvent: {}
+[3.145047] (-) TimerEvent: {}
+[3.245919] (-) TimerEvent: {}
+[3.346783] (-) TimerEvent: {}
+[3.447768] (-) TimerEvent: {}
+[3.548685] (-) TimerEvent: {}
+[3.649602] (-) TimerEvent: {}
+[3.750520] (-) TimerEvent: {}
+[3.851461] (-) TimerEvent: {}
+[3.952389] (-) TimerEvent: {}
+[4.053293] (-) TimerEvent: {}
+[4.154224] (-) TimerEvent: {}
+[4.255179] (-) TimerEvent: {}
+[4.356087] (-) TimerEvent: {}
+[4.457074] (-) TimerEvent: {}
+[4.558042] (-) TimerEvent: {}
+[4.659027] (-) TimerEvent: {}
+[4.760066] (-) TimerEvent: {}
+[4.861028] (-) TimerEvent: {}
+[4.961942] (-) TimerEvent: {}
+[5.062877] (-) TimerEvent: {}
+[5.163847] (-) TimerEvent: {}
+[5.264758] (-) TimerEvent: {}
+[5.365675] (-) TimerEvent: {}
+[5.466723] (-) TimerEvent: {}
+[5.567754] (-) TimerEvent: {}
+[5.668754] (-) TimerEvent: {}
+[5.769689] (-) TimerEvent: {}
+[5.870612] (-) TimerEvent: {}
+[5.971581] (-) TimerEvent: {}
+[6.072589] (-) TimerEvent: {}
+[6.173571] (-) TimerEvent: {}
+[6.274561] (-) TimerEvent: {}
+[6.375622] (-) TimerEvent: {}
+[6.476877] (-) TimerEvent: {}
+[6.578382] (-) TimerEvent: {}
+[6.679863] (-) TimerEvent: {}
+[6.781336] (-) TimerEvent: {}
+[6.882844] (-) TimerEvent: {}
+[6.984403] (-) TimerEvent: {}
+[7.085874] (-) TimerEvent: {}
+[7.187412] (-) TimerEvent: {}
+[7.288934] (-) TimerEvent: {}
+[7.390445] (-) TimerEvent: {}
+[7.492006] (-) TimerEvent: {}
+[7.593026] (-) TimerEvent: {}
+[7.694026] (-) TimerEvent: {}
+[7.795029] (-) TimerEvent: {}
+[7.896062] (-) TimerEvent: {}
+[7.996913] (-) TimerEvent: {}
+[8.097799] (-) TimerEvent: {}
+[8.198676] (-) TimerEvent: {}
+[8.299611] (-) TimerEvent: {}
+[8.400569] (-) TimerEvent: {}
+[8.501528] (-) TimerEvent: {}
+[8.602501] (-) TimerEvent: {}
+[8.703512] (-) TimerEvent: {}
+[8.804451] (-) TimerEvent: {}
+[8.905340] (-) TimerEvent: {}
+[9.006232] (-) TimerEvent: {}
+[9.107161] (-) TimerEvent: {}
+[9.208060] (-) TimerEvent: {}
+[9.308954] (-) TimerEvent: {}
+[9.409857] (-) TimerEvent: {}
+[9.510765] (-) TimerEvent: {}
+[9.611752] (-) TimerEvent: {}
+[9.712671] (-) TimerEvent: {}
+[9.813588] (-) TimerEvent: {}
+[9.914509] (-) TimerEvent: {}
+[10.015474] (-) TimerEvent: {}
+[10.116413] (-) TimerEvent: {}
+[10.217345] (-) TimerEvent: {}
+[10.318204] (-) TimerEvent: {}
+[10.419610] (-) TimerEvent: {}
+[10.520424] (-) TimerEvent: {}
+[10.621692] (-) TimerEvent: {}
+[10.722927] (-) TimerEvent: {}
+[10.823624] (-) TimerEvent: {}
+[10.924269] (-) TimerEvent: {}
+[11.025481] (-) TimerEvent: {}
+[11.095742] (drivetrain) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/drivetrain', 'build', '--build-base', '/home/odroid/code/catkin_ws/build/drivetrain/build', 'install', '--record', '/home/odroid/code/catkin_ws/build/drivetrain/install.log', '--single-version-externally-managed'], 'cwd': '/home/odroid/code/catkin_ws/src/drivetrain', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'odroid', 'SSH_CLIENT': '100.85.150.103 53465 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/odroid', 'OLDPWD': '/home/odroid/code/catkin_ws/src', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'humble', 'LOGNAME': 'odroid', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '8', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'media_arm_audio_decoder': 'ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,aac_latm,vorbis,raac,cook,amr,pcm,adpcm', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/odroid/code/catkin_ws/build/drivetrain', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '100.85.150.103 53465 100.68.180.110 22', 'PYTHONPATH': '/home/odroid/code/catkin_ws/build/drivetrain/prefix_override:/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'media_libplayer_modules': 'libcurl_mod.so,libdash_mod.so,libvhls_mod.so'}, 'shell': False}
+[11.125611] (-) TimerEvent: {}
+[11.226175] (-) TimerEvent: {}
+[11.326743] (-) TimerEvent: {}
+[11.427339] (-) TimerEvent: {}
+[11.527890] (-) TimerEvent: {}
+[11.628447] (-) TimerEvent: {}
+[11.673738] (drivetrain) StdoutLine: {'line': b'running egg_info\n'}
+[11.675940] (drivetrain) StdoutLine: {'line': b'writing ../../build/drivetrain/drivetrain.egg-info/PKG-INFO\n'}
+[11.676560] (drivetrain) StdoutLine: {'line': b'writing dependency_links to ../../build/drivetrain/drivetrain.egg-info/dependency_links.txt\n'}
+[11.676961] (drivetrain) StdoutLine: {'line': b'writing entry points to ../../build/drivetrain/drivetrain.egg-info/entry_points.txt\n'}
+[11.677333] (drivetrain) StdoutLine: {'line': b'writing requirements to ../../build/drivetrain/drivetrain.egg-info/requires.txt\n'}
+[11.677671] (drivetrain) StdoutLine: {'line': b'writing top-level names to ../../build/drivetrain/drivetrain.egg-info/top_level.txt\n'}
+[11.682493] (drivetrain) StdoutLine: {'line': b"reading manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'\n"}
+[11.684945] (drivetrain) StdoutLine: {'line': b"writing manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'\n"}
+[11.685425] (drivetrain) StdoutLine: {'line': b'running build\n'}
+[11.685683] (drivetrain) StdoutLine: {'line': b'running build_py\n'}
+[11.686187] (drivetrain) StdoutLine: {'line': b'running install\n'}
+[11.686587] (drivetrain) StderrLine: {'line': b'/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.\n'}
+[11.686898] (drivetrain) StderrLine: {'line': b'  warnings.warn(\n'}
+[11.687704] (drivetrain) StdoutLine: {'line': b'running install_lib\n'}
+[11.695852] (drivetrain) StdoutLine: {'line': b'running install_data\n'}
+[11.697317] (drivetrain) StdoutLine: {'line': b'running install_egg_info\n'}
+[11.701409] (drivetrain) StdoutLine: {'line': b"removing '/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[11.702091] (drivetrain) StdoutLine: {'line': b'Copying ../../build/drivetrain/drivetrain.egg-info to /home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info\n'}
+[11.704140] (drivetrain) StdoutLine: {'line': b'running install_scripts\n'}
+[11.728566] (-) TimerEvent: {}
+[11.762193] (drivetrain) StdoutLine: {'line': b'Installing drivetrain script to /home/odroid/code/catkin_ws/install/drivetrain/lib/drivetrain\n'}
+[11.763195] (drivetrain) StdoutLine: {'line': b"writing list of installed files to '/home/odroid/code/catkin_ws/build/drivetrain/install.log'\n"}
+[11.828742] (-) TimerEvent: {}
+[11.888422] (drivetrain) CommandEnded: {'returncode': 0}
+[11.929029] (-) TimerEvent: {}
+[11.933742] (drivetrain) JobEnded: {'identifier': 'drivetrain', 'rc': 0}
+[11.936032] (-) EventReactorShutdown: {}

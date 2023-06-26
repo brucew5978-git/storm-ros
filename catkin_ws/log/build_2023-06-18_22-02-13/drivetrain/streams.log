@@ -1,0 +1,24 @@
+[1.767s] Invoking command in '/home/odroid/code/catkin_ws/src/drivetrain': PS1=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/odroid/code/catkin_ws/build/drivetrain/prefix_override:/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/drivetrain build --build-base /home/odroid/code/catkin_ws/build/drivetrain/build install --record /home/odroid/code/catkin_ws/build/drivetrain/install.log --single-version-externally-managed
+[2.430s] running egg_info
+[2.432s] writing ../../build/drivetrain/drivetrain.egg-info/PKG-INFO
+[2.433s] writing dependency_links to ../../build/drivetrain/drivetrain.egg-info/dependency_links.txt
+[2.433s] writing entry points to ../../build/drivetrain/drivetrain.egg-info/entry_points.txt
+[2.434s] writing requirements to ../../build/drivetrain/drivetrain.egg-info/requires.txt
+[2.434s] writing top-level names to ../../build/drivetrain/drivetrain.egg-info/top_level.txt
+[2.439s] reading manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'
+[2.442s] writing manifest file '../../build/drivetrain/drivetrain.egg-info/SOURCES.txt'
+[2.442s] running build
+[2.443s] running build_py
+[2.443s] copying drivetrain/drivetrain.py -> /home/odroid/code/catkin_ws/build/drivetrain/build/lib/drivetrain
+[2.443s] running install
+[2.444s] running install_lib
+[2.446s] copying /home/odroid/code/catkin_ws/build/drivetrain/build/lib/drivetrain/drivetrain.py -> /home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain
+[2.448s] byte-compiling /home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain/drivetrain.py to drivetrain.cpython-310.pyc
+[2.449s] running install_data
+[2.451s] running install_egg_info
+[2.455s] removing '/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info' (and everything under it)
+[2.456s] Copying ../../build/drivetrain/drivetrain.egg-info to /home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages/drivetrain-0.0.0-py3.10.egg-info
+[2.458s] running install_scripts
+[2.516s] Installing drivetrain script to /home/odroid/code/catkin_ws/install/drivetrain/lib/drivetrain
+[2.517s] writing list of installed files to '/home/odroid/code/catkin_ws/build/drivetrain/install.log'
+[2.658s] Invoked command in '/home/odroid/code/catkin_ws/src/drivetrain' returned '0': PS1=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/odroid/code/catkin_ws/build/drivetrain/prefix_override:/home/odroid/code/catkin_ws/install/drivetrain/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/drivetrain build --build-base /home/odroid/code/catkin_ws/build/drivetrain/build install --record /home/odroid/code/catkin_ws/build/drivetrain/install.log --single-version-externally-managed
