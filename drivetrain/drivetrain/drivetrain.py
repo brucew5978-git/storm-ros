@@ -16,6 +16,7 @@ import math
 WHEEL_DIAMETER = 0.1; # in metres
 
 WHEEL_CIRUMFERENCE = WHEEL_DIAMETER * math.pi
+WIDTH_ROBOT = 0.2
 
 
 class DrivetrainNode(Node):
@@ -43,8 +44,17 @@ class DrivetrainNode(Node):
         #TODO calculate the required left and right speeds
         # and call the set speed function 
     
-    def calculate_rpm(self, vel, angle):
-        rpm = vel
+    def convert_to_tank(self, vel, ang_vel):
+        if vel == 0:
+            right_vel = ang_vel * WIDTH_ROBOT / 2.0
+            left_vel = -1 * right_vel
+            self.set_speed(right_vel, left_vel)
+        elif ang_vel == 0:
+            self.set_speed(vel,vel)
+        else:
+            left_vel = vel - ang_vel * WIDTH_ROBOT / 2.0
+            right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
+
     def set_speed(self, right,left):
         self.right_speed = right
         self.left_speed = left 
