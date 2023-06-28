@@ -14,9 +14,10 @@ import math
 
 
 WHEEL_DIAMETER = 0.1; # in metres
-
 WHEEL_CIRUMFERENCE = WHEEL_DIAMETER * math.pi
 WIDTH_ROBOT = 0.2
+
+STEPS_PER_REV  = 200
 
 
 class DrivetrainNode(Node):
@@ -54,34 +55,37 @@ class DrivetrainNode(Node):
         else:
             left_vel = vel - ang_vel * WIDTH_ROBOT / 2.0
             right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
+    
+    def rpm_to_period(self, rpm):
+        freq = (rpm * STEPS_PER_REV) / 60.0
+        return 1 / freq
 
     def set_speed(self, right,left):
-        self.right_speed = right
-        self.left_speed = left 
 
-        #TODO do some rpm conversion math to convert rpm to a timer period
-        self.right_timer.timer_period_ns(right)
-        self.left_timer.timer_period_ns(left)
+        # convert m/s to rpm
+        right_speed = (60.0 / WHEEL_CIRUMFERENCE) * right
+        left_speed = (60.0 / WHEEL_CIRUMFERENCE) * left 
+        if right_speed == 0:
+            self.right_timer.cancel()
+        else:
+            self.right_timer.reset()
+            self.right_timer.timer_period_ns(self.rpm_to_period(right_speed))
+        if left_speed == 0:
+            self.left_timer.cancel()
+        else:
+            self.left_timer.reset()
+            self.left_timer.timer_period_ns(self.rpm_to_period(left_speed))
+
+        self.left_timer.timer_period_ns(self.rpm_to_period(self.left_speed))
 
 
     def step_right(self):
-        if self.right_speed != 0:
-            print("step right")
-            self.kit.stepper1.onestep()
-    def step_left(self):
-        if self.left_speed != 0:
-            print("step left")
-            self.kit.stepper2.onestep()
-
-
-    #TODO configure these to only run at their set rates
-    def step():
+        print("step right")
         self.kit.stepper1.onestep()
+
+    def step_left(self):
+        print("step left")
         self.kit.stepper2.onestep()
-
-
-
-
 
 
 def main(args=None):
