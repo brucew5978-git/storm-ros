@@ -27,7 +27,7 @@ class DrivetrainNode(Node):
         self.subscription = self.create_subscription(
             Twist,
             'cmd_vel',
-            self.listener_callback,
+            self.cmd_vel_callback,
             10)
         self.subscription  # prevent unused variable warning
 
@@ -40,10 +40,11 @@ class DrivetrainNode(Node):
         self.left_timer = self.create_timer(timer_period_sec=self.left_speed,callback=self.step_left)
 
     #TODO rename this callback
-    def listener_callback(self, msg):
+    def cmd_vel_callback(self, msg):
         self.get_logger().info('I heard: "%f"' % msg.linear.x)
-        #TODO calculate the required left and right speeds
-        # and call the set speed function 
+        vel = msg.linear.x
+        ang_vel = msg.angular.z
+        self.convert_to_tank(vel=vel, ang_vel=ang_vel)
     
     def convert_to_tank(self, vel, ang_vel):
         if vel == 0:
