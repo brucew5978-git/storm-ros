@@ -56,6 +56,7 @@ class DrivetrainNode(Node):
         else:
             left_vel = vel - ang_vel * WIDTH_ROBOT / 2.0
             right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
+            self.set_speed(right_vel, left_vel)
     
     def rpm_to_period(self, rpm):
         freq = (rpm * STEPS_PER_REV) / 60.0
@@ -92,11 +93,12 @@ class DrivetrainNode(Node):
 def main(args=None):
     print('drivetrain main')
     print("making motor kit")
+
     rclpy.init(args=args)
 
     dt = DrivetrainNode()
 
-    rate = dt.create_rate(frequency=850)
+    # rate = dt.create_rate(frequency=850)
 
     rclpy.spin(dt)
 
