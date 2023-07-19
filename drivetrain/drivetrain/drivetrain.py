@@ -18,6 +18,7 @@ WHEEL_CIRUMFERENCE = WHEEL_DIAMETER * math.pi
 WIDTH_ROBOT = 0.2
 
 STEPS_PER_REV  = 200
+SEC_TO_NS = 10**9
 
 
 class DrivetrainNode(Node):
@@ -31,13 +32,16 @@ class DrivetrainNode(Node):
             10)
         self.subscription  # prevent unused variable warning
 
-        i2c0 = busio.I2C(board.SCL0, board.SDA0)
+        i2c0 = busio.I2C(board.SCL, board.SDA)
         self.kit = adafruit_motorkit.MotorKit(i2c=i2c0)
+        print("connected to board")
 
         self.right_speed = 0
         self.left_speed = 0
         self.right_timer = self.create_timer(timer_period_sec=self.right_speed,callback=self.step_right)
         self.left_timer = self.create_timer(timer_period_sec=self.left_speed,callback=self.step_left)
+        self.left_timer.cancel()
+        self.right_timer.cancel()
 
     #TODO rename this callback
     def cmd_vel_callback(self, msg):
@@ -58,9 +62,10 @@ class DrivetrainNode(Node):
             right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
             self.set_speed(right_vel, left_vel)
     
+    # returns period in seconds
     def rpm_to_period(self, rpm):
         freq = (rpm * STEPS_PER_REV) / 60.0
-        return 1 / freq
+        return (1 / freq) * SEC_TO_NS 
 
     def set_speed(self, right,left):
 
@@ -71,15 +76,12 @@ class DrivetrainNode(Node):
             self.right_timer.cancel()
         else:
             self.right_timer.reset()
-            self.right_timer.timer_period_ns(self.rpm_to_period(right_speed))
+            self.right_timer.timer_period_ns = self.rpm_to_period(right_speed)
         if left_speed == 0:
             self.left_timer.cancel()
         else:
             self.left_timer.reset()
-            self.left_timer.timer_period_ns(self.rpm_to_period(left_speed))
-
-        self.left_timer.timer_period_ns(self.rpm_to_period(self.left_speed))
-
+            self.left_timer.timer_period_ns = self.rpm_to_period(left_speed)
 
     def step_right(self):
         print("step right")
@@ -98,21 +100,9 @@ def main(args=None):
 
     dt = DrivetrainNode()
 
-    # rate = dt.create_rate(frequency=850)
-
+    print("starting spin")
     rclpy.spin(dt)
 
-#    x = 0
-#    while(rclpy.ok()):
-#        dt.step()
-#        dt.get_logger().info('%d' % x)
-#
-#        rate.sleep()
-         
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
     dt.destroy_node()
     rclpy.shutdown()
 
