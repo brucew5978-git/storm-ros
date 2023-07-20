@@ -62,16 +62,18 @@ class DrivetrainNode(Node):
             right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
             self.set_speed(right_vel, left_vel)
     
-    # returns period in seconds
+    # returns period in nano seconds seconds
     def rpm_to_period(self, rpm):
         freq = (rpm * STEPS_PER_REV) / 60.0
-        return (1 / freq) * SEC_TO_NS 
+        sec_per_step = 60.0 / (rpm * STEPS_PER_REV)
+        return sec_per_step * SEC_TO_NS 
 
     def set_speed(self, right,left):
 
         # convert m/s to rpm
         right_speed = (60.0 / WHEEL_CIRUMFERENCE) * right
         left_speed = (60.0 / WHEEL_CIRUMFERENCE) * left 
+        print("right, left",right_speed, left_speed)
         if right_speed == 0:
             self.right_timer.cancel()
         else:
