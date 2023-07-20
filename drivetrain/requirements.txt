@@ -1,2 +1,4 @@
 adafruit-circuitpython-motorkit
 gpiod
+setuptools==58.2.0
+RPi.GPIO
