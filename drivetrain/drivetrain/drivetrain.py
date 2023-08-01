@@ -9,6 +9,7 @@ import board
 import busio
 import time
 import adafruit_motorkit
+from adafruit_motor import stepper
 import board
 import math
 
@@ -36,6 +37,11 @@ class DrivetrainNode(Node):
         self.kit = adafruit_motorkit.MotorKit(i2c=i2c0)
         print("connected to board")
 
+        #stepper = adafruit_motorkit.stepper
+
+        self.right_direction = stepper.FORWARD
+        self.left_direction = stepper.BACKWARD
+
         self.right_speed = 0
         self.left_speed = 0
         self.right_timer = self.create_timer(timer_period_sec=self.right_speed,callback=self.step_right)
@@ -45,7 +51,7 @@ class DrivetrainNode(Node):
 
     #TODO rename this callback
     def cmd_vel_callback(self, msg):
-        self.get_logger().info('I heard: "%f"' % msg.linear.x)
+        self.get_logger().info('I heard: "x:%.3f, z:%.3f"' % (msg.linear.x, msg.angular.z))
         vel = msg.linear.x
         ang_vel = msg.angular.z
         self.convert_to_tank(vel=vel, ang_vel=ang_vel)
@@ -62,18 +68,27 @@ class DrivetrainNode(Node):
             right_vel = vel + ang_vel * WIDTH_ROBOT / 2.0
             self.set_speed(right_vel, left_vel)
     
-    # returns period in nano seconds seconds
+    # returns period in seconds
     def rpm_to_period(self, rpm):
         freq = (rpm * STEPS_PER_REV) / 60.0
-        sec_per_step = 60.0 / (rpm * STEPS_PER_REV)
-        return sec_per_step * SEC_TO_NS 
+        return (1 / freq) * SEC_TO_NS 
 
     def set_speed(self, right,left):
 
         # convert m/s to rpm
         right_speed = (60.0 / WHEEL_CIRUMFERENCE) * right
-        left_speed = (60.0 / WHEEL_CIRUMFERENCE) * left 
-        print("right, left",right_speed, left_speed)
+        left_speed = (60.0 / WHEEL_CIRUMFERENCE) * left
+
+        if right_speed < 0:
+            self.right_direction = stepper.BACKWARD
+        else:
+            self.right_direction = stepper.FORWARD
+        if left_speed < 0:
+            self.left_direction = stepper.FORWARD
+        else:
+             self.left_direction = stepper.BACKWARD
+
+
         if right_speed == 0:
             self.right_timer.cancel()
         else:
@@ -86,12 +101,12 @@ class DrivetrainNode(Node):
             self.left_timer.timer_period_ns = self.rpm_to_period(left_speed)
 
     def step_right(self):
-        print("step right")
-        self.kit.stepper1.onestep()
+        #print("step right")
+        self.kit.stepper1.onestep(direction=self.right_direction)
 
     def step_left(self):
-        print("step left")
-        self.kit.stepper2.onestep()
+       # print("step left")
+        self.kit.stepper2.onestep(direction=self.left_direction)
 
 
 def main(args=None):
