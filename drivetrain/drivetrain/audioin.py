@@ -4,9 +4,13 @@ from rclpy.node import Node
 
 from std_msgs.msg import String
 
+import os
+from dotenv import load_dotenv
+load_dotenv('/home/ubuntu/ws/src/.env')
+
 import base64
 
-home = '/home/ubuntu/ws/audio'
+name = 'app_audio'
 
 class AudioReceiverNode(Node):
 
@@ -23,10 +27,10 @@ class AudioReceiverNode(Node):
         encoded64_bytes = msg.data.encode('ascii')
         data_bytes = base64.b64decode(encoded64_bytes)
 
-        print('writing audio data to: sound.wav')
-        with open(home+"sound.wav", 'wb') as file:
+        print(f'writing audio data to: {name}.wav')
+        with open(f"{ os.environ.get('DATA_PATH') }audio/{name}.wav", 'wb') as file:
             file.write(data_bytes)
-        print('done writing')
+        print(f'wrote audio data to: {name}.wav')
 
 
 def main(args=None):
