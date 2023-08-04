@@ -32,10 +32,9 @@ class Inference_Model():
             print('Error: no model loaded, cannot perform inference')
 
             return ""
-        
         # torch.no_grad() ensures no gradients are changed during inferencing
         with torch.no_grad():
-            logits = self.model(batch_tensor.unsqueeze(0)).logits
+            logits = self.model(batch_tensor).logits
 
         pred_ids = torch.argmax(logits, dim=-1)
         predicted_text = self.processor.batch_decode(pred_ids)[0]
@@ -48,7 +47,7 @@ class Inference_Model():
 
             return ""
         
-        print("infering audio found at: ", audio_path)
+        print(f"infering audio found at: { audio_path }")
 
         try:
             # verify if sample rate of model corresponds to wav file sample rate
@@ -67,8 +66,8 @@ class Inference_Model():
         input_tensor = input["input_values"].squeeze()
 
 
-        predicted_text = self.map_to_result(input_tensor, model)
-        print("predicted command: ", predicted_text)
+        predicted_text = self.map_to_result(input_tensor)
+        print(f"predicted command: |{ predicted_text }|")
         return predicted_text
 
 if __name__ == '__main__':

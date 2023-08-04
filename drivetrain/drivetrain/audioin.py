@@ -25,6 +25,7 @@ class AudioReceiverNode(Node):
             10)
         self.subscription
 
+        print('loading inference model')
         self.model = Inference_Model()
         self.model.load_model()
 
@@ -43,6 +44,7 @@ class AudioReceiverNode(Node):
 
 def main(args=None):
 
+    print('creating audio receiver')
     rclpy.init(args=args)
     ar = AudioReceiverNode()
     print('ar spinning')
