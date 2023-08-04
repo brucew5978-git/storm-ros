@@ -4,6 +4,8 @@ from rclpy.node import Node
 
 from std_msgs.msg import String
 
+from ml_inference.inference import Inference_Model
+
 import os
 from dotenv import load_dotenv
 load_dotenv('/home/ubuntu/ws/src/.env')
@@ -23,6 +25,9 @@ class AudioReceiverNode(Node):
             10)
         self.subscription
 
+        self.model = Inference_Model()
+        self.model.load_model()
+
     def callback(self, msg):
         encoded64_bytes = msg.data.encode('ascii')
         data_bytes = base64.b64decode(encoded64_bytes)
@@ -31,6 +36,9 @@ class AudioReceiverNode(Node):
         with open(f"{ os.environ.get('DATA_PATH') }audio/{name}.wav", 'wb') as file:
             file.write(data_bytes)
         print(f'wrote audio data to: {name}.wav')
+        
+        command_text = self.model.infer_text(f"{ os.environ.get('DATA_PATH') }audio/{name}.wav")
+        
 
 
 def main(args=None):
