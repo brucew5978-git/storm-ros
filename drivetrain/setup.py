@@ -20,7 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'drivetrain = drivetrain.drivetrain:main'
+            'drivetrain = drivetrain.drivetrain:main',
+            'safestop = drivetrain.safestop:main',
+            'audioreceiver = drivetrain.audioin:main'
         ],
     },
 )
