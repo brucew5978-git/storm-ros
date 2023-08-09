@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'drivetrain = drivetrain.drivetrain:main',
             'safestop = drivetrain.safestop:main',
-            'audioreceiver = drivetrain.audioin:main'
+            'audioreceiver = drivetrain.audioin:main',
+            'imureader = drivetrain.imureader:main'
         ],
     },
 )
