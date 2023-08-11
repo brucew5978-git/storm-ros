@@ -16,6 +16,7 @@ gY_cal = 0
 gZ_cal = 0
 
 g = 9.8
+deg2rad = math.pi / 180.0
 calibrated = False
 
 CALIBRATION_DEPTH = 200
@@ -163,7 +164,7 @@ def temp2cel(temperature):
     return temperature / 340.0 + 36.53
 
 def gyro2SI(gyro):
-    return gyro / 131.0
+    return deg2rad*gyro / 131.0
 
 
 
@@ -231,7 +232,7 @@ def mahony_update(ax, ay, az, gx, gy, gz, deltat):
     q[3] = q[3] * recipNorm
     return q
 
-def get_RPY(deg=False):
+def get_rpy(deg=False):
     roll  = math.atan2((q[0] * q[1] + q[2] * q[3]), 0.5 - (q[1] * q[1] + q[2] * q[2]))
     pitch = math.asin(2.0 * (q[0] * q[2] - q[1] * q[3]))
     #conventional yaw increases clockwise from North. Not that the MPU-6050 knows where North is.
@@ -239,31 +240,36 @@ def get_RPY(deg=False):
     if (yaw < 0): yaw += 2*math.pi #compass circle
 
     if (deg):
-        yaw   *= 180.0 / math.pi
-        pitch *= 180.0 / math.pi
-        roll  *= 180.0 / math.pi
+        yaw   /= deg2rad
+        pitch /= deg2rad
+        roll  /= deg2rad
     return roll, pitch, yaw
 
-def read_RPY_stream(verbose=False):
+def read_rpy_stream(verbose=False, write2csv=False):
+    bus.write_byte_data(IMU_ADDR, 0x6B, 0)  # Wake up the MPU-6050
+    writer = None
+
+    if write2csv:
         f = open('csv_data.csv', 'w')
         writer = csv.writer(f)
+    
+    t = time.time()
+    while True:
+        aX, aY, aZ, tempC, gX, gY, gZ = get_calibrated_data()
+        dt = (time.time() - t)
         t = time.time()
-        while True:
-            aX, aY, aZ, tempC, gX, gY, gZ = get_calibrated_data()
-            dt = (time.time() - t)
-            t = time.time()
 
-            mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
-            roll, pitch, yaw = get_RPY()
+        mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
+        roll, pitch, yaw = get_rpy()
 
-            if verbose: print(f"{{roll:{roll:3.2f} | pitch:{pitch:3.2f} | yaw:{yaw:3.2f}}}")
-            writer.writerow([roll, pitch, yaw, dt, q[0], q[1], q[2], q[3]])
-            time.sleep(0.01)
+        if verbose: print(f"{{roll:{roll:3.2f} | pitch:{pitch:3.2f} | yaw:{yaw:3.2f}}}")
+        if write2csv: writer.writerow([roll, pitch, yaw, dt, q[0], q[1], q[2], q[3]])
+        time.sleep(0.01)
 
 if __name__ == "__main__":
     try:
         calibrate_imu()
-        read_RPY_stream(True)
+        read_rpy_stream(verbose=True, write2csv=False)
     except KeyboardInterrupt:
         print(" Exiting...")
     finally:
