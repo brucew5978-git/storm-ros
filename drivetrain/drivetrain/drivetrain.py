@@ -37,8 +37,6 @@ class DrivetrainNode(Node):
         self.kit = adafruit_motorkit.MotorKit(i2c=i2c0)
         print("connected to board")
 
-        #stepper = adafruit_motorkit.stepper
-
         self.right_direction = stepper.FORWARD
         self.left_direction = stepper.BACKWARD
 
