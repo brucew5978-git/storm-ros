@@ -44,12 +44,12 @@ class LocalizationNode(Node):
 
         self.subscription = self.create_subscriber(
             Pose,
-            'odom_ori',
+            'odom/ori',
             self.update_orientation
             10)
         self.subscription = self.create_subscriber(
             Twist,
-            'odom_ang_vel',
+            'odom/ang_vel',
             self.update_twist_angular
             10)
         self.subscription = self.create_subscriber(

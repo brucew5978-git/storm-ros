@@ -245,11 +245,13 @@ def get_rpy(deg=False):
         roll  /= deg2rad
     return roll, pitch, yaw
 
-def read_rpy_stream(verbose=False):
+def read_rpy_stream(verbose=False, write2csv=False):
     bus.write_byte_data(IMU_ADDR, 0x6B, 0)  # Wake up the MPU-6050
-    
-    f = open('csv_data.csv', 'w')
-    writer = csv.writer(f)
+    writer = None
+
+    if write2csv:
+        f = open('csv_data.csv', 'w')
+        writer = csv.writer(f)
     
     t = time.time()
     while True:
@@ -261,13 +263,13 @@ def read_rpy_stream(verbose=False):
         roll, pitch, yaw = get_rpy()
 
         if verbose: print(f"{{roll:{roll:3.2f} | pitch:{pitch:3.2f} | yaw:{yaw:3.2f}}}")
-        writer.writerow([roll, pitch, yaw, dt, q[0], q[1], q[2], q[3]])
+        if write2csv: writer.writerow([roll, pitch, yaw, dt, q[0], q[1], q[2], q[3]])
         time.sleep(0.01)
 
 if __name__ == "__main__":
     try:
         calibrate_imu()
-        read_rpy_stream(verbose=True)
+        read_rpy_stream(verbose=True, write2csv=False)
     except KeyboardInterrupt:
         print(" Exiting...")
     finally:

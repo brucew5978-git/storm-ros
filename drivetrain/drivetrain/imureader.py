@@ -17,11 +17,11 @@ class IMUReaderNode(Node):
 
         self.pose_pub = self.create_publisher(
             Pose,
-            'odom_ori',
+            'odom/ori',
             10)
         self.twist_pub = self.create_publisher(
             Twist,
-            'odom_ang_vel',
+            'odom/ang_vel',
             10)
 
         self.update_angular_odom()
