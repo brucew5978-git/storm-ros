@@ -1,5 +1,7 @@
 #! /home/odriod/code/catkin_ws/src/drivetrain/venv/bin/python3
 
+# DEPRECATED - STOPPING IS BUILTIN TO NEW NODES
+
 import rclpy
 from rclpy.node import Node
 

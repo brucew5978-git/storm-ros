@@ -4,6 +4,7 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import Twist 
+from std_msgs.msg import String
 
 import board
 import busio
@@ -31,6 +32,11 @@ class DrivetrainNode(Node):
             'cmd_vel',
             self.cmd_vel_callback,
             10)
+        self.subscription = self.create_subscription(
+            String,
+            'stop',
+            self.stop_callback,
+            10)
         self.subscription  # prevent unused variable warning
 
         i2c0 = busio.I2C(board.SCL, board.SDA)
@@ -47,11 +53,23 @@ class DrivetrainNode(Node):
         self.left_timer.cancel()
         self.right_timer.cancel()
 
+        self.stopped = False
+
+    def stop_callback(self, msg):
+        if msg.data == 'STOP':
+            self.get_logger().info('STOP called')
+            self.stopped = not self.stopped
+
+
     #TODO rename this callback
     def cmd_vel_callback(self, msg):
-        self.get_logger().info('I heard: "x:%.3f, z:%.3f"' % (msg.linear.x, msg.angular.z))
-        vel = msg.linear.x
-        ang_vel = msg.angular.z
+        #self.get_logger().info('I heard: "x:%.3f, z:%.3f"' % (msg.linear.x, msg.angular.z))
+        if self.stopped:
+            vel = 0
+            ang_vel = 0
+        else:
+            vel = msg.linear.x
+            ang_vel = msg.angular.z
         self.convert_to_tank(vel=vel, ang_vel=ang_vel)
     
     def convert_to_tank(self, vel, ang_vel):

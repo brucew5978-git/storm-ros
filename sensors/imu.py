@@ -28,7 +28,30 @@ q = [1.0, 0, 0, 0]
 Kp = 30.0
 Ki = 1.0
 
+# https://en.wikipedia.org/wiki/Covariance_matrix
+# https://www.cuemath.com/algebra/covariance-matrix/
+# represents the joint variability (ie randomness) of two variables, or the
+# approximate strength of the linear relationship between the measurements
+# C(i,j) = 0, i & j have no relationship
+# diagonal C(i,i) represents measurement i's own uncertainty
 
+# velocity in x, y, z, angular velocity about X axis, Y axis, Z axis
+#                   vx  vy vz wx wy wz
+twistCovariance = [0.05, 0.0, 0.0, 0.0, 0.0, 0.0, # vx
+                   0.0, 0.05, 0.0, 0.0, 0.0, 0.0, # vy
+                   0.0, 0.0, 0.05, 0.0, 0.0, 0.0, # vz
+                   0.0, 0.0, 0.0, 0.05, 0.0, 0.0, # wx
+                   0.0, 0.0, 0.0, 0.0, 0.05, 0.0, # wy
+                   0.0, 0.0, 0.0, 0.0, 0.0, 0.05] # wz
+
+# x, y, z, rotation about X axis, Y axis, Z axis
+#                  x   y  z  rl  pt yw
+poseCovariance = [0.05, 0.0, 0.0, 0.0, 0.0, 0.0, # x
+                  0.0, 0.05, 0.0, 0.0, 0.0, 0.0, # y
+                  0.0, 0.0, 0.05, 0.0, 0.0, 0.0, # z
+                  0.0, 0.0, 0.0, 0.05, 0.0, 0.0, # roll
+                  0.0, 0.0, 0.0, 0.0, 0.05, 0.0, # pitch
+                  0.0, 0.0, 0.0, 0.0, 0.0, 0.05] # yaw
 
 # reading raw data ------------------------------------------------
 def read_word_2c(register):

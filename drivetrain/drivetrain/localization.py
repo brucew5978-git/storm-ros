@@ -7,6 +7,8 @@ from geometry_msgs.msg import Pose, Twist
 
 import time
 
+# DEPRECATED - Localization is done with robot-localization package
+
 # https://en.wikipedia.org/wiki/Covariance_matrix
 # https://www.cuemath.com/algebra/covariance-matrix/
 # represents the joint variability (ie randomness) of two variables, or the
@@ -57,7 +59,7 @@ class LocalizationNode(Node):
         self.subscription = self.create_subscriber(
             Twist,
             'cmd_vel',
-            self.update_linear, 
+            self.update_linear,
             10)
         
         self.subscription  # prevent unused variable warning
