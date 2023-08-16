@@ -14,7 +14,7 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='static_tf_pub_imu',
-        arguments=['0', '0', '0.02', '0', '0', '0', '1', 'base_link', 'odom'],
+        arguments=['0', '0', '0.02', '0', '0', '0', '1', 'odom', 'base_link'],
     )
     
     return LaunchDescription([

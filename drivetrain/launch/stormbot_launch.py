@@ -35,7 +35,7 @@ def generate_launch_description():
     )
 
     lidar_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(lidar_pkg, 'launch/imu_launch.py')]),
+        PythonLaunchDescriptionSource([os.path.join(lidar_pkg, 'launch/ydlidar_launch.py')]),
     )
     
     return LaunchDescription([

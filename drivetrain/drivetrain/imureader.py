@@ -6,14 +6,12 @@ from geometry_msgs.msg import PoseWithCovarianceStamped, TwistWithCovarianceStam
 import sensors.imu as imu
 import time
 
-refresh_interval = 1/100
+update_frequency = 10 #in Hz
 
 class IMUReaderNode(Node):
 
     def __init__(self):
         super().__init__('imureader')
-        self.pose = PoseWithCovarianceStamped()
-        self.twist = TwistWithCovarianceStamped()
 
         self.pose_pub = self.create_publisher(
             PoseWithCovarianceStamped,
@@ -23,48 +21,49 @@ class IMUReaderNode(Node):
             TwistWithCovarianceStamped,
             'odom/ang_vel',
             10)
-        
-        self.pose.covariance = imu.poseCovariance
-        self.twist.covariance = imu.twistCovariance
 
-        self.pose.header.frame_id = "odom"
-        self.twist.header.frame_id = "odom"
-
-        self.update_angular_odom()
+        self.timer = self.create_timer(1/update_frequency, self.update_angular_odom)
+        self.t = time.time()
 
     def update_angular_odom(self):
-        t = time.time()
-        while True:
-            aX, aY, aZ, tempC, gX, gY, gZ = imu.get_calibrated_data()
-            dt = time.time() - t
-            t = time.time()
+        aX, aY, aZ, tempC, gX, gY, gZ = imu.get_calibrated_data()
+        dt = time.time() - self.t
+        self.t = time.time()
 
-            q = imu.mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
-            #roll, pitch, yaw = imu.get_RPY()
+        q = imu.mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
+        #roll, pitch, yaw = imu.get_RPY()
 
-            self.pose.orientation.w = q[0]
-            self.pose.orientation.x = q[1]
-            self.pose.orientation.y = q[2]
-            self.pose.orientation.z = q[3]
+        poseS = PoseWithCovarianceStamped()
+        twistS = TwistWithCovarianceStamped()
 
-            self.twist.angular.x = gX
-            self.twist.angular.y = gY
-            self.twist.angular.z = gZ
+        poseS.header.frame_id = "odom"
+        twistS.header.frame_id = "odom"
 
-            self.pose.header.stamp = time.time()
-            self.pose_pub.publish(self.pose)
+        poseS.pose.covariance = imu.poseCovariance
+        twistS.twist.covariance = imu.twistCovariance
 
-            self.twist.header.stamp = time.time()
-            self.twist_pub.publish(self.twist)
+        poseS.pose.pose.orientation.w = q[0]
+        poseS.pose.pose.orientation.x = q[1]
+        poseS.pose.pose.orientation.y = q[2]
+        poseS.pose.pose.orientation.z = q[3]
 
-            time.sleep(refresh_interval)
+        twistS.twist.twist.angular.x = gX
+        twistS.twist.twist.angular.y = gY
+        twistS.twist.twist.angular.z = gZ
+
+        #poseS.header.stamp = self.get_clock().now().to_msg()
+        self.pose_pub.publish(poseS)
+
+        #twistS.header.stamp = self.get_clock().now().to_msg()
+        self.twist_pub.publish(twistS)
+
 
 def main(args=None):
 
     print('creating imu reader')
     rclpy.init(args=args)
     ir = IMUReaderNode()
-    print('ar spinning')
+    print('ir spinning')
     rclpy.spin(ir)
 
     ir.destroy_node()
