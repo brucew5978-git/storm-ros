@@ -54,6 +54,8 @@ class LocalizationNode(Node):
             'odom/ang_vel',
             self.update_twist_angular,
             10)
+        #odom topics published by imureader.py
+
         self.subscription = self.create_subscriber(
             Twist,
             'cmd_vel',
