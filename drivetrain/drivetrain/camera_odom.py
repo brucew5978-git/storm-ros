@@ -14,6 +14,9 @@ class CameraOdometry(Node):
         super().__init__('cameraOdometry')
 
         self.time = time.time()
+        self.pitch = 0
+        self.yaw = 0
+
         self.twist = Twist()
 
         self.twist_publisher = self.create_publisher(
@@ -25,12 +28,22 @@ class CameraOdometry(Node):
         self.update_camera_angle()
     
     def update_camera_angle(self):
-        t = time.time()
+        time_difference = time.time() - self.time
 
         pitch, yaw = get_pitch_yaw()
 
-        self.twist.angular.x = pitch
-        self.twist.angular.y = yaw
+        pitch_difference = pitch-self.pitch
+        yaw_difference = yaw-self.yaw
+
+        self.pitch = pitch
+        self.yaw = yaw
+
+        angular_velocity_x = (pitch_difference)/time_difference
+        angular_velocity_y = (yaw_difference)/time_difference
+
+
+        self.twist.angular.x = angular_velocity_x
+        self.twist.angular.y = angular_velocity_y
         self.twist.angular.z = 0
 
         self.twist_publisher.publish(self.twist)
