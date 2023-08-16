@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 
-from geometry_msgs.msg import Pose, Twist
+from geometry_msgs.msg import PoseWithCovarianceStamped, TwistWithCovarianceStamped
 
 import sensors.imu as imu
 import time
@@ -12,17 +12,23 @@ class IMUReaderNode(Node):
 
     def __init__(self):
         super().__init__('imureader')
-        self.pose = Pose()
-        self.twist = Twist()
+        self.pose = PoseWithCovarianceStamped()
+        self.twist = TwistWithCovarianceStamped()
 
         self.pose_pub = self.create_publisher(
-            Pose,
+            PoseWithCovarianceStamped,
             'odom/ori',
             10)
         self.twist_pub = self.create_publisher(
-            Twist,
+            TwistWithCovarianceStamped,
             'odom/ang_vel',
             10)
+        
+        self.pose.covariance = imu.poseCovariance
+        self.twist.covariance = imu.twistCovariance
+
+        self.pose.header.frame_id = "odom"
+        self.twist.header.frame_id = "odom"
 
         self.update_angular_odom()
 
@@ -45,7 +51,10 @@ class IMUReaderNode(Node):
             self.twist.angular.y = gY
             self.twist.angular.z = gZ
 
+            self.pose.header.stamp = time.time()
             self.pose_pub.publish(self.pose)
+
+            self.twist.header.stamp = time.time()
             self.twist_pub.publish(self.twist)
 
             time.sleep(refresh_interval)
