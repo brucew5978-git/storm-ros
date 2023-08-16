@@ -23,7 +23,8 @@ setup(
             'drivetrain = drivetrain.drivetrain:main',
             'safestop = drivetrain.safestop:main',
             'audioreceiver = drivetrain.audioin:main',
-            'imureader = drivetrain.imureader:main'
+            'imureader = drivetrain.imureader:main',
+            'camera_odom = drivetrain.camera_odom:main',
         ],
     },
 )
