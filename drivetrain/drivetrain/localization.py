@@ -45,17 +45,17 @@ class LocalizationNode(Node):
         self.subscription = self.create_subscriber(
             Pose,
             'odom/ori',
-            self.update_orientation
+            self.update_orientation,
             10)
         self.subscription = self.create_subscriber(
             Twist,
             'odom/ang_vel',
-            self.update_twist_angular
+            self.update_twist_angular,
             10)
         self.subscription = self.create_subscriber(
             Twist,
             'cmd_vel',
-            self.update_linear
+            self.update_linear, 
             10)
         
         self.subscription  # prevent unused variable warning
