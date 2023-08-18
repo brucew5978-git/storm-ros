@@ -35,23 +35,23 @@ Ki = 1.0
 # C(i,j) = 0, i & j have no relationship
 # diagonal C(i,i) represents measurement i's own uncertainty
 
-# velocity in x, y, z, angular velocity about X axis, Y axis, Z axis
-#                   vx  vy vz wx wy wz
-twistCovariance = [0.05, 0.0, 0.0, 0.0, 0.0, 0.0, # vx
-                   0.0, 0.05, 0.0, 0.0, 0.0, 0.0, # vy
-                   0.0, 0.0, 0.05, 0.0, 0.0, 0.0, # vz
-                   0.0, 0.0, 0.0, 0.05, 0.0, 0.0, # wx
-                   0.0, 0.0, 0.0, 0.0, 0.05, 0.0, # wy
-                   0.0, 0.0, 0.0, 0.0, 0.0, 0.05] # wz
+# orientation (angles) about X axis, Y axis, Z axis
+#                    rl    pt   yw 
+oriCovariance = [0.05,  0.0,  0.0, # rl
+                  0.0, 0.05,  0.0, # pt
+                  0.0,  0.0, 0.05] # yw
 
-# x, y, z, rotation about X axis, Y axis, Z axis
-#                  x   y  z  rl  pt yw
-poseCovariance = [0.05, 0.0, 0.0, 0.0, 0.0, 0.0, # x
-                  0.0, 0.05, 0.0, 0.0, 0.0, 0.0, # y
-                  0.0, 0.0, 0.05, 0.0, 0.0, 0.0, # z
-                  0.0, 0.0, 0.0, 0.05, 0.0, 0.0, # roll
-                  0.0, 0.0, 0.0, 0.0, 0.05, 0.0, # pitch
-                  0.0, 0.0, 0.0, 0.0, 0.0, 0.05] # yaw
+# angular_velocity about X axis, Y axis, Z axis
+#                    rl    pt   yw 
+angVelCovariance = [0.05,  0.0,  0.0, # rl
+                     0.0, 0.05,  0.0, # pt
+                     0.0,  0.0, 0.05] # yw
+
+# acceleration in x, y, z
+#                    x     y     z 
+accelCovariance = [0.05,  0.0,  0.0, # x
+                    0.0, 0.05,  0.0, # y
+                    0.0,  0.0, 0.05] # z
 
 # reading raw data ------------------------------------------------
 def read_word_2c(register):

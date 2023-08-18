@@ -2,8 +2,9 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import PoseWithCovarianceStamped, TwistWithCovarianceStamped
+from sensors_msgs.msg import Imu
 
-import sensors.imu as imu
+import sensors.imu as imu_driver
 import time
 
 update_frequency = 10 #in Hz
@@ -13,50 +14,42 @@ class IMUReaderNode(Node):
     def __init__(self):
         super().__init__('imureader')
 
-        self.pose_pub = self.create_publisher(
-            PoseWithCovarianceStamped,
-            'odom/ori',
-            10)
-        self.twist_pub = self.create_publisher(
-            TwistWithCovarianceStamped,
-            'odom/ang_vel',
+        self.publisher = self.create_publisher(
+            Imu,
+            'odom/imu',
             10)
 
         self.timer = self.create_timer(1/update_frequency, self.update_angular_odom)
         self.t = time.time()
 
     def update_angular_odom(self):
-        aX, aY, aZ, tempC, gX, gY, gZ = imu.get_calibrated_data()
+        aX, aY, aZ, tempC, gX, gY, gZ = imu_driver.get_calibrated_data()
         dt = time.time() - self.t
         self.t = time.time()
 
-        q = imu.mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
-        #roll, pitch, yaw = imu.get_RPY()
+        q = imu_driver.mahony_update(aX, aY, aZ, gX, gY, gZ, dt)
 
-        poseS = PoseWithCovarianceStamped()
-        twistS = TwistWithCovarianceStamped()
+        imuData = Imu()
+        imuData.header.frame_id = "odom"
 
-        poseS.header.frame_id = "odom"
-        twistS.header.frame_id = "odom"
+        imuData.orientation_covariance = imu_driver.oriCovariance
+        imuData.angular_velocity_covariance = imu_driver.angVelCovariance
+        imuData.linear_acceleration_covariance = imu_driver.accelCovariance
 
-        poseS.pose.covariance = imu.poseCovariance
-        twistS.twist.covariance = imu.twistCovariance
+        imuData.orientation.w = q[0]
+        imuData.orientation.x = q[1]
+        imuData.orientation.y = q[2]
+        imuData.orientation.z = q[3]
 
-        poseS.pose.pose.orientation.w = q[0]
-        poseS.pose.pose.orientation.x = q[1]
-        poseS.pose.pose.orientation.y = q[2]
-        poseS.pose.pose.orientation.z = q[3]
+        imuData.angular_velocity.x = gX
+        imuData.angular_velocity.y = gY
+        imuData.angular_velocity.z = gZ
 
-        twistS.twist.twist.angular.x = gX
-        twistS.twist.twist.angular.y = gY
-        twistS.twist.twist.angular.z = gZ
+        imuData.linear_acceleration.x = aX
+        imuData.linear_acceleration.y = aY
+        imuData.linear_acceleration.z = aZ
 
-        #poseS.header.stamp = self.get_clock().now().to_msg()
-        self.pose_pub.publish(poseS)
-
-        #twistS.header.stamp = self.get_clock().now().to_msg()
-        self.twist_pub.publish(twistS)
-
+        self.publisher.publish(imuData)
 
 def main(args=None):
 
