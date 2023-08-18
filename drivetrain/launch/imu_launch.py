@@ -14,7 +14,8 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         name='static_tf_pub_imu',
-        arguments=['0', '-0.012', '-0.012', '0', '0', '0', '1', 'odom', 'base_link'],
+        arguments=['0.0', '0.09', '0.0', '-0.5', '0.5', '-0.5', '0.5', 'odom', 'base_link'], # jank setup with imu battering ram
+        #arguments=['0', '-0.012', '-0.012', '0', '0', '0', '1', 'odom', 'base_link'],
         # odom is PARENT of base_link: transformations must be negative relative to robot
     )
     

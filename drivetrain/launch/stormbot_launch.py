@@ -26,7 +26,7 @@ def generate_launch_description():
 
     lidar_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(lidar_pkg, 'launch/ydlidar_launch.py')]),
-    )
+    ) # to edit lidar launch settings, go to ~/ydlidar directory
 
     navigation_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(pkg_share, 'launch/navigation_launch.py')]),

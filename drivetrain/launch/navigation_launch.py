@@ -5,9 +5,8 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 
 from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import FrontendLaunchDescriptionSource, PythonLaunchDescriptionSource
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
-from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -21,14 +20,22 @@ def generate_launch_description():
     )
 
     nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(nav2_pkg, 'launch/navigation_launch.py'),
-            launch_arguments = {
-                'params_file' : [os.path.join(pkg_share, 'config/nav2_config.yaml')]
-            }.items(),
-        )
-    )
+        PythonLaunchDescriptionSource(os.path.join(nav2_pkg, 'launch/navigation_launch.py')),
+        launch_arguments = {
+            'params_file' : [os.path.join(pkg_share, 'config/nav2.yaml')]
+        }.items(),
+    ),
+
+    tf2_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_tf_pub_base_footpring',
+        arguments=['0.0', '0.0', '-0.05', '0', '0', '0', '0', 'base_link', 'base_footprint'], 
+    ),
+
 
     return LaunchDescription([
         slam_launch,
         nav2_launch,
+        tf2_node
     ])
