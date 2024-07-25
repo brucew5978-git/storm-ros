@@ -2,7 +2,7 @@
 
 This repo contains code for running the navigation stack of STORM, a low-cost mobile robot designed to help students learn the fundamentals of robotics.
 
-![alt text](https://github.com/trinity-robotics/storm-ros/main/Storm_Iteration_2_-_Assembly.png)
+![alt text](https://github.com/trinity-robotics/storm-ros/blob/main/Storm_Iteration_2_-_Assembly.png)
 
 ## Get Started
 The STORM navigation stack utilizes ROS (robot operating system), to orchestrate communication between various peripherals - such as motors, and the onboard computer. 
