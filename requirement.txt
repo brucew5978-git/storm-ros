@@ -1,0 +1,5 @@
+torch=2.4.0
+torchaudio=2.4.0
+transformers
+rclpy
+roslibpy=1.7.0
